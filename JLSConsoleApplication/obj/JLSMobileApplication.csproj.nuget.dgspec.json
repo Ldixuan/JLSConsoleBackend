@@ -1,0 +1,232 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSMobileApplication\\JLSMobileApplication.csproj": {}
+  },
+  "projects": {
+    "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSDataAccess\\JLSDataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSDataAccess\\JLSDataAccess.csproj",
+        "projectName": "JLSDataAccess",
+        "projectPath": "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSDataAccess\\JLSDataAccess.csproj",
+        "packagesPath": "C:\\Users\\49135\\.nuget\\packages\\",
+        "outputPath": "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSDataAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\49135\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSDataModel\\JLSDataModel.csproj": {
+                "projectPath": "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSDataModel\\JLSDataModel.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSDataModel\\JLSDataModel.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSDataModel\\JLSDataModel.csproj",
+        "projectName": "JLSDataModel",
+        "projectPath": "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSDataModel\\JLSDataModel.csproj",
+        "packagesPath": "C:\\Users\\49135\\.nuget\\packages\\",
+        "outputPath": "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSDataModel\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\49135\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSMobileApplication\\JLSMobileApplication.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSMobileApplication\\JLSMobileApplication.csproj",
+        "projectName": "JLSMobileApplication",
+        "projectPath": "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSMobileApplication\\JLSMobileApplication.csproj",
+        "packagesPath": "C:\\Users\\49135\\.nuget\\packages\\",
+        "outputPath": "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSMobileApplication\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\49135\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSDataAccess\\JLSDataAccess.csproj": {
+                "projectPath": "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSDataAccess\\JLSDataAccess.csproj"
+              },
+              "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSDataModel\\JLSDataModel.csproj": {
+                "projectPath": "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSDataModel\\JLSDataModel.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.AspNetCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Razor.Design": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
