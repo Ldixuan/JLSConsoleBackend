@@ -28,7 +28,7 @@ namespace JLSDataAccess.Repositories
 
         private Boolean saveImage(IFormFile image)
         {
-            String path = "Resoures/images/" + image.FileName;
+            String path = "images/" + image.FileName;
             if (System.IO.File.Exists(path))
             {
                 System.IO.File.Delete(path);

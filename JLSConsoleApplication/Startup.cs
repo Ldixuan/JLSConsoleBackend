@@ -82,7 +82,7 @@ namespace JLSMobileApplication
 
             });
 
-            services.AddAuthentication(options =>
+            /*services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = "JwtBearer";
                 options.DefaultChallengeScheme = "JwtBearer";
@@ -100,7 +100,7 @@ namespace JLSMobileApplication
                      ValidateLifetime = true, //validate the expiration and not before values in the token
                      ClockSkew = TimeSpan.FromMinutes(5) //5 minute tolerance for the expiration date
                  };
-             });
+             });*/
 
             services.AddScoped<IProductRepository, ProductRepository>();
         }
@@ -122,8 +122,8 @@ namespace JLSMobileApplication
             app.UseStaticFiles(new StaticFileOptions //配置静态文件夹
             {
                 FileProvider = new PhysicalFileProvider(
-                   Path.Combine(Directory.GetCurrentDirectory(), "Resoures")),
-                RequestPath = "/Resoures",
+                   Path.Combine(Directory.GetCurrentDirectory(), "images")),
+                RequestPath = "/images",
                 OnPrepareResponse = ctx =>
                 {
                     // Requires the following import:

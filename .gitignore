@@ -1,11 +1,11 @@
 /JLSDataAccess/obj
-/JLSMobileApplication/bin
-/JLSMobileApplication/obj
-/JLSMobileApplication/Logs
+/JLSConsoleApplication/bin
+/JLSConsoleApplication/obj
+/JLSConsoleApplication/Logs
 /JLSDataModel/obj
 /.vs
 /JLSDataModel/bin
 /JLSDataAccess/bin
 Properties
-/JLSMobileApplication/web.config
-/JLSMobileApplication/images/*
+/JLSConsoleApplication/web.config
+/JLSConsoleApplication/images/*
