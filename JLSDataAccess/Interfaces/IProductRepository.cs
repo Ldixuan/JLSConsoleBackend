@@ -1,4 +1,5 @@
 ﻿using JLSDataModel.Models.Product;
+using JLSDataModel.ViewModels;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,10 @@ namespace JLSDataAccess.Interfaces
 {
     public interface IProductRepository
     {
-        Task<int> saveProduct(Product product, IFormFile image);
+        Task<int> saveProduct(Product product, List<IFormFile> image);
+
+        Task<List<ReferenceItemViewModel>> GetProductCategory(String lang);
+
+        Task<List<ReferenceItemViewModel>> GetTaxRate();
     }
 }

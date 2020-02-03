@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace JLSMobileApplication.Resources
+namespace JLSConsoleApplication.Resources
 {
     public class UserRegistrationView
     {

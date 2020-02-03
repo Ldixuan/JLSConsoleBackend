@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using JLSConsoleApplication.Resources;
+using JLSDataModel.Models;
+using JLSDataModel.Models.Product;
 using JLSDataModel.Models.User;
-using JLSMobileApplication.Resources;
 
 namespace JLSMobileApplication.Configurations
 {
@@ -9,6 +11,8 @@ namespace JLSMobileApplication.Configurations
         public MappingProfile()
         {
             CreateMap<UserRegistrationView, User>();// 将UserRegistrationView 映射到user中
+            CreateMap<ProductRegistrationView, Product>();
+            CreateMap<ReferenceLabelRegistrationView, ReferenceLabel>();
         }
     }
 }

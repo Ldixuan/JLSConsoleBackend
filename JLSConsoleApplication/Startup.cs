@@ -47,7 +47,7 @@ namespace JLSMobileApplication
                 options.AddPolicy(MyAllowSpecificOrigins,
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:4201")
+                        builder.WithOrigins("http://localhost:4200")
                             .AllowAnyHeader()
                             .WithMethods()
                             .AllowCredentials(); ;
@@ -103,6 +103,7 @@ namespace JLSMobileApplication
              });*/
 
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IReferenceRepository, ReferenceRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

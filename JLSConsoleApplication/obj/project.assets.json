@@ -13036,11 +13036,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSMobileApplication\\JLSMobileApplication.csproj",
-      "projectName": "JLSMobileApplication",
-      "projectPath": "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSMobileApplication\\JLSMobileApplication.csproj",
+      "projectUniqueName": "D:\\workEspace\\JLSProjet\\JLSMobileConsoleBackend\\JLSConsoleApplication\\JLSConsoleApplication.csproj",
+      "projectName": "JLSConsoleApplication",
+      "projectPath": "D:\\workEspace\\JLSProjet\\JLSMobileConsoleBackend\\JLSConsoleApplication\\JLSConsoleApplication.csproj",
       "packagesPath": "C:\\Users\\49135\\.nuget\\packages\\",
-      "outputPath": "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSMobileApplication\\obj\\",
+      "outputPath": "D:\\workEspace\\JLSProjet\\JLSMobileConsoleBackend\\JLSConsoleApplication\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13059,11 +13059,11 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSDataAccess\\JLSDataAccess.csproj": {
-              "projectPath": "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSDataAccess\\JLSDataAccess.csproj"
+            "D:\\workEspace\\JLSProjet\\JLSMobileConsoleBackend\\JLSDataAccess\\JLSDataAccess.csproj": {
+              "projectPath": "D:\\workEspace\\JLSProjet\\JLSMobileConsoleBackend\\JLSDataAccess\\JLSDataAccess.csproj"
             },
-            "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSDataModel\\JLSDataModel.csproj": {
-              "projectPath": "D:\\workEspace\\JLSProjet\\JLSMobileApplicationBackend\\JLSDataModel\\JLSDataModel.csproj"
+            "D:\\workEspace\\JLSProjet\\JLSMobileConsoleBackend\\JLSDataModel\\JLSDataModel.csproj": {
+              "projectPath": "D:\\workEspace\\JLSProjet\\JLSMobileConsoleBackend\\JLSDataModel\\JLSDataModel.csproj"
             }
           }
         }

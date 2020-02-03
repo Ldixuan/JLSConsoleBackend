@@ -2,7 +2,7 @@
 using JLSDataAccess;
 
 using JLSDataModel.Models.User;
-using JLSMobileApplication.Resources;
+using JLSConsoleApplication.Resources;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

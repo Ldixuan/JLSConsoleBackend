@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace JLSMobileApplication.Models
+namespace JLSDataModel.ViewModels
 {
     public class ApiResult
     {
