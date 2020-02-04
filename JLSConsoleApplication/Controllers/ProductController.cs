@@ -41,15 +41,18 @@ namespace JLSMobileApplication.Controllers
             List<ReferenceLabel> langLabels = JsonConvert.DeserializeObject<List<ReferenceLabel>>(langLabelInfo);
             
             Product product = _mapper.Map<Product>(productParam);
+            product.Validity = true;
 
             product.ReferenceItem = new ReferenceItem
             {
                 Code = productParam.ProductReferenceCode,
                 Value = productParam.Name,
-                ReferenceCategoryId = productParam.Category
+                ParentId = productParam.Category,
+                ReferenceCategoryId = 3,
+                Validity = true
             };
 
-            int res = await this._productRepository.saveProduct(product, images);
+            int res = await this._productRepository.saveProduct(product, images, langLabels);
             ApiResult result = new ApiResult() { Success = true, Msg = "OK", Type = "200" };
             return Json(result);
         }
@@ -78,6 +81,38 @@ namespace JLSMobileApplication.Controllers
             try
             {
                 List<ReferenceItemViewModel> data = await _productRepository.GetTaxRate();
+                result = new ApiResult() { Success = true, Msg = "OK", Type = "200", Data = data };
+            }
+            catch (Exception e)
+            {
+                result = new ApiResult() { Success = false, Msg = e.Message, Type = "500" };
+            }
+            return Json(result);
+        }
+
+        [HttpGet("getAll")]
+        public async Task<JsonResult> GetAllProducts(string lang)
+        {
+            ApiResult result;
+            try
+            {
+                List<ProductsListViewModel> data = await _productRepository.GetAllProduct(lang);
+                result = new ApiResult() { Success = true, Msg = "OK", Type = "200", Data = data };
+            }
+            catch (Exception e)
+            {
+                result = new ApiResult() { Success = false, Msg = e.Message, Type = "500" };
+            }
+            return Json(result);
+        }
+
+        [HttpGet("getById")]
+        public async Task<JsonResult> GetProductById(long id)
+        {
+            ApiResult result;
+            try
+            {
+                ProductViewModel data = await _productRepository.GetProductById(id);
                 result = new ApiResult() { Success = true, Msg = "OK", Type = "200", Data = data };
             }
             catch (Exception e)

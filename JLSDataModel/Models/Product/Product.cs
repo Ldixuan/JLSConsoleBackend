@@ -4,7 +4,6 @@ namespace JLSDataModel.Models.Product
 {
     public class Product:BaseObject
     {
-        public string Name { get; set; }
         public string ProductReferenceCode { get; set; }
         public float? Price { get; set; }
         public int? QuantityPerBox { get; set; }

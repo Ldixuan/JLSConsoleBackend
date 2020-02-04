@@ -7,6 +7,7 @@ namespace JLSConsoleApplication.Resources
 {
     public class ProductRegistrationView
     {
+        public long Id { get; set; }
         public string Name { get; set; }
         public string ProductReferenceCode { get; set; }
         public float? Price { get; set; }
