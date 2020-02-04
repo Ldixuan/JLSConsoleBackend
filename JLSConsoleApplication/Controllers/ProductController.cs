@@ -57,6 +57,23 @@ namespace JLSMobileApplication.Controllers
             return Json(result);
         }
 
+        [HttpPost("removeImageById")]
+        public async Task<JsonResult> RemoveImageById([FromBody]long id)
+        {
+            int res = await this._productRepository.RemoveImageById(id);
+            ApiResult result;
+            if (res == 1)
+            {
+                result = new ApiResult() { Success = true, Msg = "OK", Type = "200" };
+            }
+            else
+            {
+                result = new ApiResult() { Success = false, Msg = "Fail", Type = "500" };
+            }
+
+            return Json(result);
+        }
+
         [HttpGet("category")]
         public async Task<JsonResult> GetProductCategory(string lang)
         {

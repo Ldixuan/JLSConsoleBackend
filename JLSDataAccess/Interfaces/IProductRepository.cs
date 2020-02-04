@@ -20,5 +20,7 @@ namespace JLSDataAccess.Interfaces
         Task<List<ProductsListViewModel>> GetAllProduct(string lang);
 
         Task<ProductViewModel> GetProductById(long id);
+
+        Task<int> RemoveImageById(long id);
     }
 }

@@ -82,7 +82,7 @@ namespace JLSDataAccess.Repositories
                     context.ProductPhotoPath.Add(
                         new ProductPhotoPath
                         {
-                            Path = imagesPath + "/" + image.FileName,
+                            Path = product.ReferenceItem.Code + "/" + image.FileName,
                             ProductId = product.Id
                         }
                     );
@@ -185,6 +185,34 @@ namespace JLSDataAccess.Repositories
                                    where img.ProductId == result.Id
                                    select img).ToListAsync();
             return result;
+        }
+
+        public async Task<int> RemoveImageById(long id)
+        {
+            ProductPhotoPath image = await context.ProductPhotoPath.FindAsync(id);
+
+            if(image == null)
+            {
+                return 0;
+            }
+
+            string imagePath = "images/" + image.Path;
+
+            try
+            {
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+
+                context.ProductPhotoPath.Remove(image);
+
+                await context.SaveChangesAsync();
+            }catch(Exception e)
+            {
+                return 0;
+            }
+            return 1;
         }
     }
 }
