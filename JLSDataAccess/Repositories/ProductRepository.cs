@@ -57,7 +57,7 @@ namespace JLSDataAccess.Repositories
                 context.Product.Add(product);
                 await context.SaveChangesAsync();
 
-                labels = CheckLabels(labels, product.ReferenceItemId);
+                labels = _referencRepository.CheckLabels(labels, product.ReferenceItemId);
                 foreach (ReferenceLabel label in labels)
                 {
                     context.ReferenceLabel.Add(label);
@@ -67,7 +67,7 @@ namespace JLSDataAccess.Repositories
             {
                 context.Product.Update(product);
 
-                labels = CheckLabels(labels, product.ReferenceItemId);
+                labels = _referencRepository.CheckLabels(labels, product.ReferenceItemId);
                 foreach (ReferenceLabel label in labels)
                 {
                     context.ReferenceLabel.Update(label);
@@ -90,21 +90,6 @@ namespace JLSDataAccess.Repositories
             }
             await context.SaveChangesAsync();
             return 1;
-        }
-
-        private List<ReferenceLabel> CheckLabels(List<ReferenceLabel> labels, long referenceItemId)
-        {
-
-            string defaultLabel = labels.Find(label => label.Lang.Equals(_defaultLang)).Label;
-            foreach (ReferenceLabel label in labels)
-            {
-                if (label.Label == "")
-                {
-                    label.Label = defaultLabel;
-                }
-                label.ReferenceItemId = referenceItemId;
-            }
-            return labels;
         }
 
         private async Task<Boolean> SaveImage(IFormFile image, string path)

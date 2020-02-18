@@ -47,7 +47,7 @@ namespace JLSMobileApplication
                 options.AddPolicy(MyAllowSpecificOrigins,
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:4200")
+                        builder.WithOrigins("http://localhost:4200","http://localhost:4201")
                             .AllowAnyHeader()
                             .WithMethods()
                             .AllowCredentials(); ;

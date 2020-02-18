@@ -18,5 +18,15 @@ namespace JLSDataAccess.Interfaces
 
         Task<List<ReferenceItem>> GetReferenceItemsByCode(string referencecode, string lang);
 
+        Task<List<ReferenceCategory>> GetAllReferenceCategory();
+
+        Task<List<ReferenceItemViewModel>> GetAllReferenceItem();
+
+        Task<int> updateItem(ReferenceItem item, List<ReferenceLabel> labels);
+
+        List<ReferenceLabel> CheckLabels(List<ReferenceLabel> labels, long referenceItemId);
+
+        Task<int> updateCategory(ReferenceCategory category);
+
     }
 }
