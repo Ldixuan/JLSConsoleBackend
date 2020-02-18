@@ -91,6 +91,15 @@ namespace JLSDataAccess.Repositories
             return result;
         }
 
+        public async Task<List<ReferenceCategory>> GetAllValidityReferenceCategory()
+        {
+            var result = await (from rc in db.ReferenceCategory
+                                where rc.Validity == true
+                                select rc).ToListAsync();
+
+            return result;
+        }
+
         public async Task<int> updateItem(ReferenceItem item, List<ReferenceLabel> labels)
         {
             if(item.Id == 0)

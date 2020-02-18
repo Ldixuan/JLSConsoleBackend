@@ -56,6 +56,23 @@ namespace JLSConsoleApplication.Controllers
             return Json(result);
         }
 
+        [HttpGet("getValidityCategory")]
+        public async Task<JsonResult> GetAllValidityReferenceCategory()
+        {
+            ApiResult result;
+            try
+            {
+                List<ReferenceCategory> data = await _referenceRepository.GetAllValidityReferenceCategory();
+                result = new ApiResult() { Success = true, Msg = "OK", Type = "200", Data = data };
+            }
+            catch (Exception e)
+            {
+                result = new ApiResult() { Success = false, Msg = e.Message, Type = "500" };
+            }
+
+            return Json(result);
+        }
+
         [HttpPost("updateItem")]
         public async Task<JsonResult> UpdateReferenceItem([FromForm]IFormCollection itemData)
         {

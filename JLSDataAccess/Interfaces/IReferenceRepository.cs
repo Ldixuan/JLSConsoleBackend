@@ -28,5 +28,7 @@ namespace JLSDataAccess.Interfaces
 
         Task<int> updateCategory(ReferenceCategory category);
 
+        Task<List<ReferenceCategory>> GetAllValidityReferenceCategory();
+
     }
 }
