@@ -41,7 +41,6 @@ namespace JLSMobileApplication.Controllers
             List<ReferenceLabel> langLabels = JsonConvert.DeserializeObject<List<ReferenceLabel>>(langLabelInfo);
             
             Product product = _mapper.Map<Product>(productParam);
-            product.Validity = true;
 
             product.ReferenceItem = new ReferenceItem
             {

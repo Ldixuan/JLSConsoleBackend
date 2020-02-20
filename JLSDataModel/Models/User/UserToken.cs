@@ -4,13 +4,14 @@ using System.Text;
 
 namespace JLSDataModel.Models.User
 {
-    public class UserShippingAdress:BaseObject
+    public class UserToken:BaseObject
     {
+        public string Token { get; set; }
+        public DateTime Expires { get; set; }
+ 
+        public bool Active { get; set; }
+
         public int UserId { get; set; }
         public User User { get; set; }
-
-        public long ShippingAdressId { get; set; }
-
-        public Adress.Adress ShippingAdress { get; set; }
     }
 }

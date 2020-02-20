@@ -21,8 +21,13 @@ namespace JLSDataModel.Models.Order
         public float? TaxRate { get; set; }
 
         // 外键: 客户
+        public int UserId { get; set; }
+        public User.User User { get; set; }
 
         public long StatusReferenceItemId { get; set; }
         public ReferenceItem StatusReferenceItem { get; set; }
+
+        public long AdressId { get; set; }
+        public Adress.Adress Adress { get; set; }
     }
 }

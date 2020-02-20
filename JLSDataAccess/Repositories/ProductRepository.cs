@@ -135,8 +135,8 @@ namespace JLSDataAccess.Repositories
                                     Category = ri.ParentId,
                                     Image = img.Path,
                                     Price = p.Price,
-                                    Validity = p.Validity,
-                                    ReferenceCode = ri.Code
+                                    ReferenceCode = ri.Code,
+                                    Validity = ri.Validity,
                                 }).ToListAsync();
             return result;
         }
@@ -159,9 +159,13 @@ namespace JLSDataAccess.Repositories
                               MinQuantity = p.MinQuantity,
                               Price = p.Price,
                               QuantityPerBox = p.QuantityPerBox,
-                              ReferenceItemId = ri.Id
+                              ReferenceItemId = ri.Id,
                           }).FirstOrDefaultAsync();
 
+            if (result == null)
+            {
+                return null;
+            }
             result.Label = await (from rl in context.ReferenceLabel
                            where rl.ReferenceItemId == result.ReferenceItemId
                            select rl).ToListAsync();

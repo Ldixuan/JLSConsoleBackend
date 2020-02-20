@@ -4,7 +4,6 @@ namespace JLSDataModel.Models.Product
 {
     public class Product:BaseObject
     {
-        public string ProductReferenceCode { get; set; }
         public float? Price { get; set; }
         public int? QuantityPerBox { get; set; }
         public int? MinQuantity { get; set; }
@@ -19,9 +18,6 @@ namespace JLSDataModel.Models.Product
 
         public string Description { get; set; }
         /* 不确定需要询问客户 */
-
-
-        public bool? Validity { get; set; }
 
         public long ReferenceItemId { get; set; }
         public ReferenceItem ReferenceItem { get; set; }
