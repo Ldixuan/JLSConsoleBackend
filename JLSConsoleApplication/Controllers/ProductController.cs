@@ -15,7 +15,7 @@ using Newtonsoft.Json;
 
 namespace JLSMobileApplication.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/{action}/{id?}")]
     [ApiController]
     public class ProductController : Controller
     {
@@ -27,7 +27,7 @@ namespace JLSMobileApplication.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("save")]
+        [HttpPost]
         public async Task<JsonResult> SaveProduct([FromForm]IFormCollection productData)
         {
             StringValues productInfo;
@@ -51,12 +51,12 @@ namespace JLSMobileApplication.Controllers
                 Validity = true
             };
 
-            int res = await this._productRepository.saveProduct(product, images, langLabels);
+            int res = await this._productRepository.SaveProduct(product, images, langLabels);
             ApiResult result = new ApiResult() { Success = true, Msg = "OK", Type = "200" };
             return Json(result);
         }
 
-        [HttpPost("removeImageById")]
+        [HttpPost]
         public async Task<JsonResult> RemoveImageById([FromBody]long id)
         {
             int res = await this._productRepository.RemoveImageById(id);
@@ -73,7 +73,7 @@ namespace JLSMobileApplication.Controllers
             return Json(result);
         }
 
-        [HttpGet("category")]
+        [HttpGet]
         public async Task<JsonResult> GetProductCategory(string lang)
         {
             ApiResult result;
@@ -90,7 +90,7 @@ namespace JLSMobileApplication.Controllers
             return Json(result);
         }
 
-        [HttpGet("taxRate")]
+        [HttpGet]
         public async Task<JsonResult> GetTaxRate()
         {
             ApiResult result;
@@ -106,13 +106,13 @@ namespace JLSMobileApplication.Controllers
             return Json(result);
         }
 
-        [HttpGet("getAll")]
-        public async Task<JsonResult> GetAllProducts(string lang)
+        [HttpGet]
+        public async Task<JsonResult> GetAllProducts(string lang, int intervalCount, int size, string orderActive, string orderDirection)
         {
             ApiResult result;
             try
             {
-                List<ProductsListViewModel> data = await _productRepository.GetAllProduct(lang);
+                List<ProductsListViewModel> data = await _productRepository.GetAllProduct(lang, intervalCount, size, orderActive, orderDirection);
                 result = new ApiResult() { Success = true, Msg = "OK", Type = "200", Data = data };
             }
             catch (Exception e)
@@ -122,7 +122,7 @@ namespace JLSMobileApplication.Controllers
             return Json(result);
         }
 
-        [HttpGet("getById")]
+        [HttpGet]
         public async Task<JsonResult> GetProductById(long id)
         {
             ApiResult result;

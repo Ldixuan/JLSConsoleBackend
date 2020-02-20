@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace JLSConsoleApplication.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/{action}/{id?}")]
     [ApiController]
     public class ReferenceController : Controller
     {
@@ -22,14 +22,14 @@ namespace JLSConsoleApplication.Controllers
         {
             _referenceRepository = referenceRepository;
         }
-        [HttpGet("getItems")]
-        public async Task<JsonResult> GetAllReferenceItems()
+        [HttpGet]
+        public async Task<JsonResult> GetAllReferenceItems(int intervalCount, int size, string orderActive, string orderDirection)
         {
             ApiResult result;
             try
             {
-                List<ReferenceItemViewModel> data = await _referenceRepository.GetAllReferenceItem();
-                result = new ApiResult() { Success = true, Msg = "OK", Type = "200", Data = data };
+                List<ReferenceItemViewModel> data = await _referenceRepository.GetReferenceItemWithInterval(intervalCount, size, orderActive, orderDirection);
+                result = new ApiResult() { Success = true, Msg = "OK", Type = "200", Data = data  };
             }
             catch (Exception e)
             {
@@ -39,7 +39,7 @@ namespace JLSConsoleApplication.Controllers
             return Json(result);
         }
 
-        [HttpGet("getCategory")]
+        [HttpGet]
         public async Task<JsonResult> GetAllReferenceCategory()
         {
             ApiResult result;
@@ -56,7 +56,7 @@ namespace JLSConsoleApplication.Controllers
             return Json(result);
         }
 
-        [HttpGet("getValidityCategory")]
+        [HttpGet]
         public async Task<JsonResult> GetAllValidityReferenceCategory()
         {
             ApiResult result;
@@ -73,8 +73,26 @@ namespace JLSConsoleApplication.Controllers
             return Json(result);
         }
 
-        [HttpPost("updateItem")]
-        public async Task<JsonResult> UpdateReferenceItem([FromForm]IFormCollection itemData)
+        [HttpGet]
+        public async Task<JsonResult> GetReferenceItemsCount()
+        {
+            ApiResult result;
+            try
+            {
+                int data = await _referenceRepository.GetReferenceItemsCount();
+                result = new ApiResult() { Success = true, Msg = "OK", Type = "200", Data = data };
+            }
+            catch (Exception e)
+            {
+                result = new ApiResult() { Success = false, Msg = e.Message, Type = "500" };
+            }
+
+            return Json(result);
+        }
+
+
+        [HttpPost]
+        public async Task<JsonResult> CreatorUpdateReferenceItem([FromForm]IFormCollection itemData)
         {
             StringValues itemInfo;
             StringValues langLabelInfo;
@@ -85,15 +103,15 @@ namespace JLSConsoleApplication.Controllers
             ReferenceItem item = JsonConvert.DeserializeObject<ReferenceItem>(itemInfo);
             List<ReferenceLabel> langLabels = JsonConvert.DeserializeObject<List<ReferenceLabel>>(langLabelInfo);
 
-            int res = await this._referenceRepository.updateItem(item, langLabels);
+            int res = await this._referenceRepository.CreatorUpdateItem(item, langLabels);
             ApiResult result = new ApiResult() { Success = true, Msg = "OK", Type = "200" };
             return Json(result);
         }
 
-        [HttpPost("updateCategory")]
-        public async Task<JsonResult> updateReferenceCategory([FromBody]ReferenceCategory category)
+        [HttpPost]
+        public async Task<JsonResult> CreatorUpdateReferenceCategory([FromBody]ReferenceCategory category)
         {
-            int res = await this._referenceRepository.updateCategory(category);
+            int res = await this._referenceRepository.CreatorUpdateCategory(category);
             ApiResult result = new ApiResult() { Success = true, Msg = "OK", Type = "200" };
             return Json(result);
         }

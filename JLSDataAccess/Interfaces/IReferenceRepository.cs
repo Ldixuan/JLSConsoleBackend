@@ -20,15 +20,17 @@ namespace JLSDataAccess.Interfaces
 
         Task<List<ReferenceCategory>> GetAllReferenceCategory();
 
-        Task<List<ReferenceItemViewModel>> GetAllReferenceItem();
+        Task<List<ReferenceItemViewModel>> GetReferenceItemWithInterval(int intervalCount, int size, string orderActive, string orderDirection);
 
-        Task<int> updateItem(ReferenceItem item, List<ReferenceLabel> labels);
+        Task<int> CreatorUpdateItem(ReferenceItem item, List<ReferenceLabel> labels);
 
         List<ReferenceLabel> CheckLabels(List<ReferenceLabel> labels, long referenceItemId);
 
-        Task<int> updateCategory(ReferenceCategory category);
+        Task<int> CreatorUpdateCategory(ReferenceCategory category);
 
         Task<List<ReferenceCategory>> GetAllValidityReferenceCategory();
+
+        Task<int> GetReferenceItemsCount();
 
     }
 }

@@ -4,11 +4,12 @@ using System.Text;
 
 namespace JLSDataModel.ViewModels
 {
-    class OrdersListViewModel
+    public class OrdersListViewModel
     {
-        public string Id { get; set; }
+        public long Id { get; set; }
         public string OrderReferenceCode { get; set; }
 
+        public string UserName { get; set; }
         public string EntrepriseName { get; set; }
 
         public float? TotalPrice { get; set; }

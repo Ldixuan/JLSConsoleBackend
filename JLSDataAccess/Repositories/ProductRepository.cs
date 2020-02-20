@@ -12,6 +12,7 @@ using System.Security.AccessControl;
 using JLSDataModel.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace JLSDataAccess.Repositories
 {
@@ -40,7 +41,7 @@ namespace JLSDataAccess.Repositories
             return result;
         }
 
-        public async Task<int> saveProduct(Product product, List<IFormFile> images, List<ReferenceLabel> labels)
+        public async Task<int> SaveProduct(Product product, List<IFormFile> images, List<ReferenceLabel> labels)
         {
             string imagesPath = "images/" + product.ReferenceItem.Code + "/";
 
@@ -120,24 +121,66 @@ namespace JLSDataAccess.Repositories
             return true;
         }
 
-        public async Task<List<ProductsListViewModel>> GetAllProduct(string lang)
+        public async Task<List<ProductsListViewModel>> GetAllProduct(string lang, int intervalCount, int size, string orderActive, string orderDirection)
         {
-            var result = await (from ri in context.ReferenceItem
-                                join rc in context.ReferenceCategory on ri.ReferenceCategoryId equals rc.Id
-                                from rl in context.ReferenceLabel.Where(p => p.ReferenceItemId == ri.Id && p.Lang == lang).DefaultIfEmpty()
-                                where rc.ShortLabel.Equals("Product")
-                                join p in context.Product on ri.Id equals p.ReferenceItemId
-                                from img in context.ProductPhotoPath.Where(img => p.Id == img.ProductId).Take(1).DefaultIfEmpty()
-                                select new ProductsListViewModel
-                                {
-                                    Id = p.Id,
-                                    Name = rl.Label,
-                                    Category = ri.ParentId,
-                                    Image = img.Path,
-                                    Price = p.Price,
-                                    ReferenceCode = ri.Code,
-                                    Validity = ri.Validity,
-                                }).ToListAsync();
+            var request = (from ri in context.ReferenceItem
+                          join rc in context.ReferenceCategory on ri.ReferenceCategoryId equals rc.Id
+                          from rl in context.ReferenceLabel.Where(p => p.ReferenceItemId == ri.Id && p.Lang == lang).DefaultIfEmpty()
+                          where rc.ShortLabel.Equals("Product")
+                          join p in context.Product on ri.Id equals p.ReferenceItemId
+                          from img in context.ProductPhotoPath.Where(img => p.Id == img.ProductId).Take(1).DefaultIfEmpty()
+                          select new ProductsListViewModel
+                          {
+                              Id = p.Id,
+                              Name = rl.Label,
+                              Category = ri.ParentId,
+                              Image = img.Path,
+                              Price = p.Price,
+                              ReferenceCode = ri.Code,
+                              Validity = ri.Validity,
+                          });
+
+            if (orderActive == "null" || orderActive == "undefined" || orderDirection == "null")
+            {
+                return await request.Skip(intervalCount * size).Take(size).ToListAsync();
+            }
+
+            Expression<Func<ProductsListViewModel, object>> funcOrder;
+
+            switch (orderActive)
+            {
+                case "reference":
+                    funcOrder = p => p.ReferenceCode;
+                    break;
+                case "name":
+                    funcOrder = p => p.Name;
+                    break;
+                case "categories":
+                    funcOrder = p => p.Category;
+                    break;
+                case "price":
+                    funcOrder = p => p.Price;
+                    break;
+                case "active":
+                    funcOrder = p => p.Validity;
+                    break;
+                default:
+                    funcOrder = p => p.Id;
+                    break;
+            }
+
+            if (orderDirection == "asc")
+            {
+                request = request.OrderBy(funcOrder);
+            }
+            else
+            {
+                request = request.OrderByDescending(funcOrder);
+            }
+
+            var result = await request.Skip(intervalCount * size).Take(size).ToListAsync();
+
+
             return result;
         }
 

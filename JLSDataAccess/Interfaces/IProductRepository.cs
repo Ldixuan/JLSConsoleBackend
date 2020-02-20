@@ -11,13 +11,13 @@ namespace JLSDataAccess.Interfaces
 {
     public interface IProductRepository
     {
-        Task<int> saveProduct(Product product, List<IFormFile> image, List<ReferenceLabel> labels);
+        Task<int> SaveProduct(Product product, List<IFormFile> image, List<ReferenceLabel> labels);
 
         Task<List<ReferenceItemViewModel>> GetProductCategory(string lang);
 
         Task<List<ReferenceItemViewModel>> GetTaxRate();
 
-        Task<List<ProductsListViewModel>> GetAllProduct(string lang);
+        Task<List<ProductsListViewModel>> GetAllProduct(string lang, int intervalCount, int size, string orderActive, string orderDirection);
 
         Task<ProductViewModel> GetProductById(long id);
 

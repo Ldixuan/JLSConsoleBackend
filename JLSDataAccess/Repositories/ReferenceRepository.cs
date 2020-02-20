@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using JLSDataModel.ViewModels;
 using JLSDataAccess.Interfaces;
 using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore.Metadata;
+using System.Linq.Expressions;
 
 namespace JLSDataAccess.Repositories
 {
@@ -61,25 +63,79 @@ namespace JLSDataAccess.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<List<ReferenceItemViewModel>> GetAllReferenceItem()
+        public async Task<List<ReferenceItemViewModel>> GetReferenceItemWithInterval(int intervalCount, int size, string orderActive, string orderDirection)
         {
-            var result = await (from ri in db.ReferenceItem
-                          join rc in db.ReferenceCategory on ri.ReferenceCategoryId equals rc.Id
-                          select new ReferenceItemViewModel
-                          {
-                              Id = ri.Id,
-                              Code = ri.Code,
-                              Value = ri.Value,
-                              Order = ri.Order,
-                              ParentId = ri.ParentId,
-                              Category = rc.ShortLabel,
-                              ReferenceCategoryId = rc.Id,
-                              Validity = ri.Validity,
-                              Labels = (from rl in db.ReferenceLabel
-                                             where rl.ReferenceItemId == ri.Id
-                                             select rl).ToList(),
-                            }).ToListAsync<ReferenceItemViewModel>();
+            var request = (from ri in db.ReferenceItem
+                           join rc in db.ReferenceCategory on ri.ReferenceCategoryId equals rc.Id
+                           select new ReferenceItemViewModel
+                           {
+                               Id = ri.Id,
+                               Code = ri.Code,
+                               Value = ri.Value,
+                               Order = ri.Order,
+                               ParentId = ri.ParentId,
+                               Category = rc.ShortLabel,
+                               ReferenceCategoryId = rc.Id,
+                               Validity = ri.Validity,
+                               Labels = (from rl in db.ReferenceLabel
+                                         where rl.ReferenceItemId == ri.Id
+                                         select rl).ToList(),
+                           });
 
+            if(orderActive == "null" || orderActive == "undefined" || orderDirection == "null")
+            {
+                return await request.Skip(intervalCount * size).Take(size).ToListAsync();
+            }
+
+            Expression<Func<ReferenceItemViewModel, object>> funcOrder;
+
+            switch (orderActive)
+            {
+                case "id":
+                    funcOrder = rm => rm.Id;
+                    break;
+                case "active":
+                    funcOrder = rm => rm.Validity;
+                    break;
+                case "code":
+                    funcOrder = rm => rm.Code;
+                    break;
+                case "parentId":
+                    funcOrder = rm => rm.ParentId;
+                    break;
+                case "value":
+                    funcOrder = rm => rm.Value;
+                    break;
+                case "order":
+                    funcOrder = rm => rm.Order;
+                    break;
+                case "category":
+                    funcOrder = rm => rm.Category;
+                    break;
+                default:
+                    funcOrder = rm => rm.Id;
+                    break;
+            }
+
+            //IEnumerable<ReferenceItemViewModel> requestWithOrder;
+            if (orderDirection == "asc")
+            {
+                request = request.OrderBy(funcOrder);
+            }
+            else
+            {
+                request = request.OrderByDescending(funcOrder);
+            }
+
+            var result = await request.Skip(intervalCount * size).Take(size).ToListAsync();
+
+
+            return result;
+        }
+
+        public async Task<int> GetReferenceItemsCount()
+        {
+            var result = await db.ReferenceItem.CountAsync();
             return result;
         }
 
@@ -100,7 +156,7 @@ namespace JLSDataAccess.Repositories
             return result;
         }
 
-        public async Task<int> updateItem(ReferenceItem item, List<ReferenceLabel> labels)
+        public async Task<int> CreatorUpdateItem(ReferenceItem item, List<ReferenceLabel> labels)
         {
             if(item.Id == 0)
             {
@@ -130,7 +186,7 @@ namespace JLSDataAccess.Repositories
             return 1;
         }
 
-        public async Task<int> updateCategory(ReferenceCategory category)
+        public async Task<int> CreatorUpdateCategory(ReferenceCategory category)
         {
             if(category.Id == 0)
             {
