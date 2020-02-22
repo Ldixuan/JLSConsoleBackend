@@ -10,5 +10,6 @@ namespace JLSDataAccess.Interfaces
     {
         Task<List<OrdersListViewModel>> GetAllOrdersWithInterval(string lang, int intervalCount, int size, string orderActive, string orderDirection);
 
+        Task<OrderViewModel> GetOrderById(long id, string lang);
     }
 }

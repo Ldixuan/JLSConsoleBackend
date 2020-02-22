@@ -90,5 +90,57 @@ namespace JLSDataAccess.Repositories
 
             return result;
         }
-    }
+
+        public async Task<OrderViewModel> GetOrderById(long id,string lang)
+        {
+            var result = await (from order in context.OrderInfo
+                          where order.Id == id
+                          join sa in context.Adress on order.ShippingAdressId equals sa.Id
+                          join fa in context.Adress on order.FacturationAdressId equals fa.Id
+                          join user in context.Users on order.UserId equals user.Id
+                          join ris in context.ReferenceItem on order.StatusReferenceItemId equals ris.Id
+                          from rls in context.ReferenceLabel.Where(rls => rls.ReferenceItemId == ris.Id
+                          && rls.Lang == lang).Take(1).DefaultIfEmpty()
+                          select new OrderViewModel
+                          {
+                              OrderReferenceCode = order.OrderReferenceCode,
+                              PaymentInfo = order.PaymentInfo,
+                              TaxRate = order.TaxRate,
+                              TotalPrice = order.TotalPrice,
+                              AdminRemark = order.AdminRemark,
+                              ClientRemark = order.ClientRemark,
+                              StatusLabel = rls.Label,
+                              StatusReferenceItem = ris,
+                              User = new UserViewModel 
+                              { 
+                                    Id = user.Id,
+                                    Email = user.Email,
+                                    EntrepriseName = user.EntrepriseName,
+                                    Name = user.UserName,
+                                    Telephone = user.PhoneNumber
+                              },
+                              FacturationAdress = fa,
+                              ShippingAdress = sa,
+                              Products = (from po in context.OrderProduct
+                                          where po.OrderId == order.Id
+                                          join rip in context.ReferenceItem on po.ReferenceId equals rip.Id
+                                          join pi in context.Product on rip.Id equals pi.ReferenceItemId
+                                          from img in context.ProductPhotoPath.Where(img => img.ProductId == pi.Id)
+                                          .Take(1).DefaultIfEmpty()
+                                          from rlp in context.ReferenceLabel.Where(rlp => rlp.ReferenceItemId == rip.Id
+                                          && rlp.Lang == lang).Take(1).DefaultIfEmpty()
+                                          select new OrderProductViewModel
+                                          { 
+                                            Id = pi.Id,
+                                            Image = img.Path,
+                                            Name = rlp.Label,
+                                            Price = pi.Price,
+                                            Quantity = po.Quantity,
+                                            ReferenceCode = rip.Code
+                                          }).ToList()
+                          }).FirstOrDefaultAsync();
+
+            return result;
+        }
+    } 
 }

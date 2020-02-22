@@ -14,14 +14,15 @@ namespace JLSDataModel.Models.Adress
 
         public string ContactFirstName { get; set; }
 
-        public string ZipCode { get; set; }
+        public string PostCode { get; set; }
 
-        public string FirstLineAddress { get; set; }
+        public string StreeName { get; set; }
 
-        public string SecondLineAddress { get; set; }
+        public string AdressDetail { get; set; }
         public string City { get; set; }
         public string Provence { get; set; }
 
-        public string Country { get; set; }
+        public long CountryId { get; set; }
+        public ReferenceItem Country { get; set; }
     }
 }

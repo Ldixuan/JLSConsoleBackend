@@ -23,12 +23,12 @@ namespace JLSConsoleApplication.Controllers
             _referenceRepository = referenceRepository;
         }
         [HttpGet]
-        public async Task<JsonResult> GetAllReferenceItems(int intervalCount, int size, string orderActive, string orderDirection)
+        public async Task<JsonResult> GetAllReferenceItems(int intervalCount, int size, string orderActive, string orderDirection, string filter)
         {
             ApiResult result;
             try
             {
-                List<ReferenceItemViewModel> data = await _referenceRepository.GetReferenceItemWithInterval(intervalCount, size, orderActive, orderDirection);
+                List<ReferenceItemViewModel> data = await _referenceRepository.GetReferenceItemWithInterval(intervalCount, size, orderActive, orderDirection, filter);
                 result = new ApiResult() { Success = true, Msg = "OK", Type = "200", Data = data  };
             }
             catch (Exception e)

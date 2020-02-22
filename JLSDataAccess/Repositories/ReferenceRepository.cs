@@ -10,6 +10,7 @@ using JLSDataAccess.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Linq.Expressions;
+using LinqKit;
 
 namespace JLSDataAccess.Repositories
 {
@@ -63,8 +64,16 @@ namespace JLSDataAccess.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<List<ReferenceItemViewModel>> GetReferenceItemWithInterval(int intervalCount, int size, string orderActive, string orderDirection)
+        public async Task<List<ReferenceItemViewModel>> GetReferenceItemWithInterval(int intervalCount, int size, string orderActive, string orderDirection, string filter)
         {
+            if(filter == null)
+            {
+                filter = "";
+            }
+            var predicate = PredicateBuilder.New<ReferenceItemViewModel>();
+            predicate.Or(ri => ri.Code.Contains(filter));
+            predicate.Or(ri => ri.Category.Contains(filter));
+
             var request = (from ri in db.ReferenceItem
                            join rc in db.ReferenceCategory on ri.ReferenceCategoryId equals rc.Id
                            select new ReferenceItemViewModel
@@ -80,7 +89,7 @@ namespace JLSDataAccess.Repositories
                                Labels = (from rl in db.ReferenceLabel
                                          where rl.ReferenceItemId == ri.Id
                                          select rl).ToList(),
-                           });
+                           }).Where(predicate);
 
             if(orderActive == "null" || orderActive == "undefined" || orderDirection == "null")
             {

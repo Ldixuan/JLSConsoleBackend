@@ -13,6 +13,7 @@ using JLSDataModel.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using LinqKit;
 
 namespace JLSDataAccess.Repositories
 {
@@ -133,7 +134,9 @@ namespace JLSDataAccess.Repositories
                           {
                               Id = p.Id,
                               Name = rl.Label,
-                              Category = ri.ParentId,
+                              Category = (from rlp in context.ReferenceLabel
+                                          where rlp.ReferenceItemId == ri.ParentId
+                                          select rlp.Label).FirstOrDefault(),
                               Image = img.Path,
                               Price = p.Price,
                               ReferenceCode = ri.Code,
@@ -245,6 +248,35 @@ namespace JLSDataAccess.Repositories
                 return 0;
             }
             return 1;
+        }
+
+        public async Task<List<ProductsListViewModel>> SearchProducts(string lang, string filter)
+        {
+            var predicate = PredicateBuilder.New<ProductsListViewModel>();
+            predicate.Or(p => p.ReferenceCode.Contains(filter));
+            predicate.Or(p => p.Name.Contains(filter));
+            predicate.Or(p => p.Category.Contains(filter));
+
+            var result = await (from ri in context.ReferenceItem
+                          where ri.Code.Contains(filter)
+                          join rc in context.ReferenceCategory on ri.ReferenceCategoryId equals rc.Id
+                          from rl in context.ReferenceLabel.Where(p => p.ReferenceItemId == ri.Id && p.Lang == lang).DefaultIfEmpty()
+                          where rc.ShortLabel.Equals("Product")
+                          join p in context.Product on ri.Id equals p.ReferenceItemId
+                          from img in context.ProductPhotoPath.Where(img => p.Id == img.ProductId).Take(1).DefaultIfEmpty()
+                          select new ProductsListViewModel
+                          {
+                              Id = p.Id,
+                              Name = rl.Label,
+                              Category = (from rlp in context.ReferenceLabel
+                                          where rlp.ReferenceItemId == ri.ParentId
+                                          select rlp.Label).FirstOrDefault(),
+                              Image = img.Path,
+                              Price = p.Price,
+                              ReferenceCode = ri.Code,
+                              Validity = ri.Validity,
+                          }).Where(predicate).Take(10).ToListAsync();
+            return result;
         }
     }
 }

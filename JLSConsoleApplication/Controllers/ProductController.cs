@@ -137,6 +137,22 @@ namespace JLSMobileApplication.Controllers
             }
             return Json(result);
         }
+
+        [HttpGet]
+        public async Task<JsonResult> SearchProducts(string lang, string filter)
+        {
+            ApiResult result;
+            try
+            {
+                List<ProductsListViewModel> data = await _productRepository.SearchProducts(lang, filter);
+                result = new ApiResult() { Success = true, Msg = "OK", Type = "200", Data = data };
+            }
+            catch (Exception e)
+            {
+                result = new ApiResult() { Success = false, Msg = e.Message, Type = "500" };
+            }
+            return Json(result);
+        }
     
 
     }

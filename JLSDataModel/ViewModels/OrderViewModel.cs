@@ -1,11 +1,15 @@
-﻿using System;
+﻿using JLSDataModel.Models.Adress;
+using JLSDataModel.Models.User;
+using JLSDataModel.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace JLSDataModel.Models.Order
+namespace JLSDataModel.ViewModels
 {
-    public class OrderInfo:BaseObject
+    public class OrderViewModel
     {
+
         public string OrderReferenceCode { get; set; }
 
         public string PaymentInfo { get; set; }
@@ -19,16 +23,16 @@ namespace JLSDataModel.Models.Order
         public float? TaxRate { get; set; }
 
         // Foreign key 
-        public int UserId { get; set; }
-        public User.User User { get; set; }
+        public UserViewModel User { get; set; }
 
-        public long StatusReferenceItemId { get; set; }
         public ReferenceItem StatusReferenceItem { get; set; }
 
-        public long ShippingAdressId { get; set; }
-        public Adress.Adress ShippingAdress { get; set; }
+        public string StatusLabel { get; set; }
 
-        public long FacturationAdressId { get; set; }
-        public Adress.Adress FacturationAdress { get; set; }
+        public Adress ShippingAdress { get; set; }
+
+        public Adress FacturationAdress { get; set; }
+
+        public List<OrderProductViewModel> Products { get; set; }
     }
 }
